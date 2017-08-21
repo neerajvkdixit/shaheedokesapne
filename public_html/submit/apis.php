@@ -9,9 +9,8 @@ switch ($_SERVER['REQUEST_METHOD'])
 {
 	
   case 'POST':
-    
-    $requestBody = file_get_contents('php://input');
-    $requestBody = json_decode($requestBody, true) or die("Could not decode JSON");
+      
+      
     
     //$requestBody = json_encode($requestBody); $requestBody = json_decode($requestBody);
     
@@ -19,18 +18,18 @@ switch ($_SERVER['REQUEST_METHOD'])
 	
 	//fwrite($myfile, json_encode($requestBody));
 	//fclose($myfile);
-    $method_name = $requestBody["method"];
+    $method_name = $_POST["methodcall"];;
     switch ($method_name)
     {
       case 'add_shaheed':
-        add_shaheed($requestBody);
+        add_shaheed();
         break;
       case 'add_volunteer':
-        add_volunteer($requestBody);
+        add_volunteer();
         break;
 
      case 'add_review' : 
-        add_review($requestBody);
+        add_review();
         break;
 
         
@@ -91,19 +90,29 @@ switch ($_SERVER['REQUEST_METHOD'])
    exit;
 }
 
-function add_shaheed ($data)
+function add_shaheed ()
 {
 
-global $servername ;
-global $username;
-global $password;
-global $dbname;
-global $port;
+    global $servername ;
+    global $username;
+    global $password;
+    global $dbname;
+    global $port;
 
 
+    $s_name = $_POST["NAME"];
+    $s_fname = $_POST["FNAME"];
+    $s_vlg = $_POST["VLG"];
+    $s_district = $_POST["DISTRICT"];
+    $s_state = $_POST["STATE"];
+    $s_contact = $_POST["CONTACT_INFO"];
 
-    $s_name = $data["shaheed_name"];$s_fname = $data["shaheed_fname"];$s_vlg = $data["shaheed_vlg"];$s_district = $data["shaheed_district"];$s_state = $data["shaheed_state"];$s_contact = $data["shaheed_contact"];
-    $j_name = $data["j_shaheed_name"];$j_fname = $data["j_shaheed_fname"];$j_vlg = $data["j_shaheed_vlg"];$j_district = $data["j_shaheed_district"];$j_state = 				$data["j_shaheed_state"];$j_contact = $data["j_shaheed_contact"];
+    $v_name = $_POST["VNAME"];
+    $v_fname = $_POST["VFNAME"];
+    $v_vlg = $_POST["VVLG"];
+    $v_district = $_POST["VDISTRICT"];
+    $v_state = $_POST["VSTATE"];
+    $v_contact = $_POST["VCONTACT_INFO"];
     
 
     
@@ -112,15 +121,13 @@ global $port;
     mysqli_set_charset( $mysqli, 'utf8' );
     
     if (mysqli_connect_errno()) {
-    
-    		$arr = array ('status'=>'fail','text'=>"Connect failed: " . mysqli_connect_error());
-
-    		echo json_encode($arr);
-	    exit(0);
+        $arr = array ('status'=>'fail','text'=>"Connect failed: " . mysqli_connect_error());
+        echo json_encode($arr);
+        exit(0);
 	}
 	
 	
-	$query = "INSERT INTO volunteer_info (NAME ,FNAME , VLG , DISTRICT , STATE ,CONTACT_INFO ) VALUES ('". $j_name ."', '".$j_fname."', '".$j_vlg."', '".$j_district."','".$j_state."','".$j_contact."')";
+	$query = "INSERT INTO volunteer_info (NAME ,FNAME , VLG , DISTRICT , STATE ,CONTACT_INFO ) VALUES ('". $v_name ."', '".$v_fname."', '".$v_vlg."', '".$v_district."','".$v_state."','".$v_contact."')";
 	
 	$mysqli->query($query);
 	
@@ -144,28 +151,31 @@ global $port;
 	
 	$mysqli->close();
 	
-	$arr = array ('status'=>'success','id'=>$shaheed_id);
-
-    	echo json_encode($arr);
-    	
-    	exit(0);
+	$arr = array ('status'=>'success','text'=>'Thank you for your time. shaheed added with id '.$shaheed_id);
+    echo json_encode($arr);
+    exit(0);
     
     
     //echo "add_shaheed called";
 }
 
-function add_volunteer ($data)
+function add_volunteer ()
 {
     global $servername ;
-global $username;
-global $password;
-global $dbname;
-global $port;
+    global $username;
+    global $password;
+    global $dbname;
+    global $port;
 
 
-
-    $s_name = $data["shaheed_name"];$s_fname = $data["shaheed_fname"];$s_vlg = $data["shaheed_vlg"];$s_district = $data["shaheed_district"];$s_state = $data["shaheed_state"];$s_contact = $data["shaheed_contact"];
-    $j_name = $data["j_shaheed_name"];$j_fname = $data["j_shaheed_fname"];$j_vlg = $data["j_shaheed_vlg"];$j_district = $data["j_shaheed_district"];$j_state = 				$data["j_shaheed_state"];$j_contact = $data["j_shaheed_contact"];
+    $v_name = $_POST["NAME"];
+    $v_fname = $_POST["FNAME"];
+    $v_vlg = $_POST["VLG"];
+    $v_district = $_POST["DISTRICT"];
+    $v_state = $_POST["STATE"];
+    $v_contact = $_POST["CONTACT_INFO"];
+    
+    
     
 
     
@@ -176,13 +186,13 @@ global $port;
     if (mysqli_connect_errno()) {
     
     		$arr = array ('status'=>'fail','text'=>"Connect failed: " . mysqli_connect_error());
+                echo json_encode($arr);
+            exit(0);
 
-    		echo json_encode($arr);
-	    exit(0);
 	}
 	
 	
-	$query = "INSERT INTO volunteer_info (NAME ,FNAME , VLG , DISTRICT , STATE ,CONTACT_INFO ) VALUES ('". $j_name ."', '".$j_fname."', '".$j_vlg."', '".$j_district."','".$j_state."','".$j_contact."')";
+	$query = "INSERT INTO volunteer_info (NAME ,FNAME , VLG , DISTRICT , STATE ,CONTACT_INFO ) VALUES ('". $v_name ."', '".$v_fname."', '".$v_vlg."', '".$v_district."','".$v_state."','".$v_contact."')";
 	
 	//echo $query;
 	
@@ -199,24 +209,25 @@ global $port;
 	
 	$mysqli->close();
 	
-	$arr = array ('status'=>'success','id'=>$vol_id);
-
-    	echo json_encode($arr);
-    	
-    	exit(0);
+	 $arr = array ('status'=>'success','text'=>'Thank you for your time. voluteer added with id '.$vol_id);
+        echo json_encode($arr);
+        exit(0);
 }
 
-function add_review ($data)
+function add_review ()
 {
     global $servername ;
-global $username;
-global $password;
-global $dbname;
-global $port;
+    global $username;
+    global $password;
+    global $dbname;
+    global $port;
 
 
 
-    $s_name = $data["s_name"];$s_email = $data["s_email"];$s_subject = $data["s_subject"];$s_message = $data["s_data"];
+    $s_name = $_POST["NAME"];
+    $s_email = $_POST["EMAIL"];
+    $s_subject = $_POST["SUBJECT"];
+    $s_message = $_POST["MSG"];
     
 
     
@@ -225,11 +236,9 @@ global $port;
     mysqli_set_charset( $mysqli, 'utf8' );
     
     if (mysqli_connect_errno()) {
-    
-    		$arr = array ('status'=>'fail','text'=>"Connect failed: " . mysqli_connect_error());
-
-    		echo json_encode($arr);
-	    exit(0);
+        $arr = array ('status'=>'fail','text'=>"Connect failed: " . mysqli_connect_error());
+        echo json_encode($arr);
+        exit(0);
 	}
 	
 	
@@ -248,11 +257,9 @@ global $port;
 	
 	$mysqli->close();
 	
-	$arr = array ('status'=>'success','id'=>$review_id);
-
-    	echo json_encode($arr);
-    	
-    	exit(0);
+	$arr = array ('status'=>'success','text'=>'Thank you for your time. REVIEW MESSAGE added with id '.$review_id);
+        echo json_encode($arr);
+        exit(0);
 }
 
 ?>

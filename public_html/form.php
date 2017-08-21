@@ -23,7 +23,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-     <script src="assets/js/request.js"></script>
+     
 
 </head>
 <body>
@@ -39,49 +39,48 @@
 
         </div>
              <div class="row">
+                 <form id = "addshaeed" action="/submit/apis.php" method="post" role="form">
             <div class="col-md-6 col-sm-6 col-xs-12">
                <div class="panel panel-info">
                         <div class="panel-heading">
                            शहीद का फॉर्म  
                         </div>
                         <div class="panel-body">
-                            <form id = "form1" role="form">
+                            
 							<label style="    margin-left: 40%;">शहीद की जानकारी</label>
 							<br>
                                         <div class="form-group">
                                             <label>शहीद  का नाम*</label>
-                                            <input class="form-control" id = "shaheed_name" type="text" />
+                                            <input  name = "NAME" class="form-control" id = "shaheed_name" type="text" />
                                         </div>
+                                        <div class="form-group">  
+                                             <input  type="hidden" name="methodcall" value="add_shaheed" />  </div>
                                  <div class="form-group">
                                             <label>शहीद  के पिता का नाम</label>
-                                            <input class="form-control" id = "shaheed_fname" type="text" />
+                                            <input name = "FNAME" class="form-control" id = "shaheed_fname" type="text" />
                                         </div>
 										
 										<label style="    margin-left: 40%;">शहीद का पता* </label>
 										
 										<div class="form-group">
                                             <label>शहीद  का गाँव*</label>
-                                            <input class="form-control" id = "shaheed_vlg" type="text" />
+                                            <input name = "VLG" class="form-control" id = "shaheed_vlg" type="text" />
                                         </div>
 										<div class="form-group">
                                             <label>शहीद  का जिला*</label>
-                                            <input class="form-control" id = "shaheed_district" type="text" />
+                                            <input name = "DISTRICT" class="form-control" id = "shaheed_district" type="text" />
                                         </div>
 										<div class="form-group">
                                             <label>शहीद  का राज्य*</label>
-                                            <input class="form-control" id = "shaheed_state" type="text" />
+                                            <input name = "STATE" class="form-control" id = "shaheed_state" type="text" />
                                         </div>
                                         
                                         
 										<div class="form-group">
                                             <label>शहीद के परिवार का मोबाइल नंबर</label>
-                                            <input class="form-control" id = "shaheed_contact" type="text" />
+                                            <input name = "CONTACT_INFO" class="form-control" id = "shaheed_contact" type="text" />
                                         </div>
 										
-										
-                                            
-
-                                    </form>
                             </div>
                         </div>
                             </div>
@@ -91,47 +90,45 @@
                             जानकारी देने वाले का फॉर्म 
                          </div> 
                          <div class="panel-body"> 
-                             <form id = "form2" role="form"> 
                                    <label style="    margin-left: 25%;">शहीदों के सपनो के लिए काम करने वालो की सुचना </label>     
                                   <div class="form-group"> 
 					
                                              <label>जानकारी देने वाले का नाम*</label> 
-                                             <input class="form-control" id = "j_shaheed_name" type="text" /> 
-											  <div class="form-group"> 
+                                             <input name="VNAME" class="form-control" id = "j_shaheed_name" type="text" /> </div>
 											  
-											  <br>
+											
 											  <div class="form-group">
                                             <label>जानकारी देने वाले  के पिता का नाम</label>
-                                            <input class="form-control" id = "j_shaheed_fname" type="text" />
+                                            <input name = "VFNAME" class="form-control" id = "j_shaheed_fname" type="text" />
                                      <!-- <p class="help-block">Help text here.</p> -->
-                                        </div> <br>
-											  
+                                        </div> 
+                                        <label style="    margin-left: 40%;">जानकारी देने व का पता* </label>
+											  <div class="form-group">
                                              <label>जानकारी देने वाले का गाँव</label> 
-                                             <input class="form-control" id = "j_shaheed_vlg" type="text" /> 
+                                             <input name = "VVLG" class="form-control" id = "j_shaheed_vlg" type="text" /> </div>
 											  <div class="form-group"> 
-											  <br>
+											  
                                              <label>जानकारी देने वाले का जिला*</label> 
-                                             <input class="form-control"  id = "j_shaheed_district" type="text" /> 
+                                             <input name = "VDISTRICT" class="form-control"  id = "j_shaheed_district" type="text" /></div> 
 											  <div class="form-group"> 
-											  <br>
+											  
                                              <label>जानकारी देने वाले का राज्य*</label> 
-                                             <input class="form-control"  id = "j_shaheed_state" type="text" />  
+                                             <input name = "VSTATE" class="form-control"  id = "j_shaheed_state" type="text" />  </div>
 											 <div class="form-group"> 
-											 <br>
+											 
                                              <label>जानकारी देने वाले  मोबाइल नंबर*</label> 
-                                             <input class="form-control" id = "j_shaheed_contact" type="text" /> 
+                                             <input name = "VCONTACT_INFO" class="form-control" id = "j_shaheed_contact" type="text" /> 
                                          </div> 
 
-                                     </form> 
                              </div> 
                          </div> 
                              </div> 
+                             </form>
         </div>
-                                  
     </div>
     </div>
 	</div>
-	<input type = "button"  id = "add_shaeed_button" value = "जानकारी भेजे" type="submit" class="btn btn-info" style = "margin-left: 40%;margin-top: 1%;    font-size: larger;     font-weight: bolder;
+	<input type = "button"  id = "add_shaeed_button" value = "जानकारी भेजे" type="submit" class="btn btn-info" style = "margin-left: 46%;    font-size: larger;     font-weight: bolder;
     text-align: center;"> </input>
 	</div>
 	</div>
@@ -146,20 +143,31 @@
     	$(document).ready(function(){
     	$(".header_page").removeClass("menu-top-active");
     	$("#form_page").addClass("menu-top-active");
-	    $("#add_shaeed_button").click(function(){
-	    	$("#add_shaeed_button").prop('disabled', true);
-	        add_shaheed(function(return_val){
-	        	$("#add_shaeed_button").prop('disabled', false);
-	        	if(return_val == true){
-		        	$("#form1")[0].reset();
-		        	$("#form2")[0].reset();
-	        	}
+    	
+    	
+    	$("#add_shaeed_button").click(function(){
 	        
-	        });
+	       $("#addshaeed").submit();
 	        
 	    });
+    	
+    	
+	   // $("#add_shaeed_button").click(function(){
+	   // 	$("#add_shaeed_button").prop('disabled', true);
+	   //     add_shaheed(function(return_val){
+	   //     	$("#add_shaeed_button").prop('disabled', false);
+	   //     	if(return_val == true){
+		  //      	$("#form1")[0].reset();
+		  //      	$("#form2")[0].reset();
+	   //     	}
+	        
+	   //     });
+	        
+	   // });
 	});
     
     </script>
+    <script src="assets/js/request.js"></script>
 </body>
 </html>
+

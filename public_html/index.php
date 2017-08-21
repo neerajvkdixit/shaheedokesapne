@@ -26,7 +26,7 @@
     
     <link rel="shortcut icon" href="assets/img/logo.ico" type="image/x-icon .ico">
 
-	<script src="assets/js/request.js"></script>
+	
 </head>
 <body>
     
@@ -262,22 +262,24 @@
                             सन्देश बनाये 
                         </div>
                         <div class="panel-body">
-                            <form id = "form1" role="form">
+                            <form id = "sendreviewmsg" action="/submit/apis.php" method="post" role="form">
+                                <div class="form-group">  
+                                             <input  type="hidden" name="methodcall" value="add_review" />  </div>
                                         <div class="form-group">
                                             <label>नाम डाले </label>
-                                            <input class="form-control" id = "s_name" type="text" />
+                                            <input name="NAME" class="form-control" id = "s_name" type="text" />
                                         </div>
                                  <div class="form-group">
                                             <label>ईमेल डाले </label>
-                                            <input class="form-control" id = "s_email" type="text" />
+                                            <input name="EMAIL" class="form-control" id = "s_email" type="text" />
                                         </div>
                                 <div class="form-group">
                                             <label>विषय </label>
-                                            <input class="form-control" id = "s_subject" type="text" />
+                                            <input name="SUBJECT" class="form-control" id = "s_subject" type="text" />
                                         </div>
                                  <div class="form-group">
                                             <label>सन्देश लिखे </label>
-                                            <input class="form-control"  id = "s_data" type="text" style="min-height:100px;" />
+                                            <input name="MSG" class="form-control"  id = "s_data" type="text" style="min-height:100px;" />
                                         </div>
                                         </div>
                                         
@@ -302,16 +304,24 @@
     	$(".header_page").removeClass("menu-top-active");
     	$("#sks_page").addClass("menu-top-active");
     	
-	    $("#send_review_button").click(function(){
-	        $("#send_review_button").prop('disabled', true);
-	        add_review(function(return_val){
-	        	$("#send_review_button").prop('disabled', false);
-	        	if(return_val == true)
-	        		$("#form1")[0].reset();
-	        
-	        });
+    	
+    	$("#send_review_button").click(function(){
+    	    
+    	    
+    	    $("#sendreviewmsg").submit();
 	        
 	    });
+    	
+	   // $("#send_review_button").click(function(){
+	   //     $("#send_review_button").prop('disabled', true);
+	   //     add_review(function(return_val){
+	   //     	$("#send_review_button").prop('disabled', false);
+	   //     	if(return_val == true)
+	   //     		$("#form1")[0].reset();
+	        
+	   //     });
+	        
+	   // });
 	});
     
     </script>
@@ -320,6 +330,8 @@
     <script src="assets/js/bootstrap.js"></script>
       <!-- CUSTOM SCRIPTS  -->
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/request.js"></script>
   
 </body>
 </html>
+

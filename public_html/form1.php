@@ -24,7 +24,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <script src="assets/js/request.js"></script>
+    
 
 </head>
 <body>
@@ -47,34 +47,36 @@
                             जुड़ने वाले का फॉर्म 
                          </div> 
                          <div class="panel-body"> 
-                             <form id="form1" role="form"> 
+                             <form id="addvolunteer" action="/submit/apis.php" method="post" role="form"> 
                                    <label style="    margin-left: 25%;">शहीदों के सपनो के लिए काम करने वालो की सुचना </label>     
                                   <div class="form-group"> 
 					
                                              <label>जुड़ने वाले का नाम*</label> 
-                                             <input class="form-control" id = "j_shaheed_name" type="text" /> 
-											  <div class="form-group"> 
+                                             <input name="NAME" class="form-control" id = "j_shaheed_name" type="text" /> </div>
+                                             
+                                             <div class="form-group">  
+                                             <input type="hidden" name="methodcall" value="add_volunteer" />  </div>
 											  <br>
 											  
 											   <div class="form-group">
                                             <label>जानकारी देने वाले  के पिता का नाम</label>
-                                            <input class="form-control" id = "j_shaheed_fname" type="text" />
+                                            <input name = "FNAME" class="form-control" id = "j_shaheed_fname" type="text" />
                                      <!-- <p class="help-block">Help text here.</p> -->
-                                        </div> <br>
+                                        </div> <br><div class="form-group"> 
                                              <label>जुड़ने वाले का गाँव</label> 
-                                             <input class="form-control" id = "j_shaheed_vlg" type="text" /> 
+                                             <input name = "VLG" class="form-control" id = "j_shaheed_vlg" type="text" /> </div>
 											  <div class="form-group"> 
 											  <br>
                                              <label>जुड़ने वाले का जिला*</label> 
-                                             <input class="form-control"  id = "j_shaheed_district" type="text" /> 
+                                             <input name = "DISTRICT" class="form-control"  id = "j_shaheed_district" type="text" /> </div>
 											  <div class="form-group"> 
 											  <br>
                                              <label>जुड़ने वाले का राज्य*</label> 
-                                             <input class="form-control" id = "j_shaheed_state" type="text" />  
+                                             <input name = "STATE" class="form-control" id = "j_shaheed_state" type="text" />  </div>
 											 <div class="form-group"> 
 											 <br>
                                              <label>जुड़ने वाले  मोबाइल नंबर*</label> 
-                                             <input class="form-control"  id = "j_shaheed_contact" type="text" />
+                                             <input name = "CONTACT_INFO" class="form-control"  id = "j_shaheed_contact" type="text" />
                                          </div> 
 
                                      </form> 
@@ -104,20 +106,28 @@
     	$(document).ready(function(){
     	$(".header_page").removeClass("menu-top-active");
     	$("#form_page").addClass("menu-top-active");
-	    $("#add_volunteer_button").click(function(){
-	       $("#add_volunteer_button").prop('disabled', true);
-	       add_volunteer(function(return_val){
-	       		$("#add_volunteer_button").prop('disabled', false);
-	       		if(return_val == true)
-	       			$("#form1")[0].reset();
-	       });
+    	
+    	$("#add_volunteer_button").click(function(){
+	       $("#addvolunteer").submit();
+	        
+	    });
+    	
+    	
+	   // $("#add_volunteer_button").click(function(){
+	   //    $("#add_volunteer_button").prop('disabled', true);
+	   //    add_volunteer(function(return_val){
+	   //    		$("#add_volunteer_button").prop('disabled', false);
+	   //    		if(return_val == true)
+	   //    			$("#form1")[0].reset();
+	   //    });
 	       
 	       		
 	        
-	    });
+	   // });
 	});
     
     </script>
-    
+    <script src="assets/js/request.js"></script>
 </body>
 </html>
+

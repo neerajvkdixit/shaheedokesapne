@@ -121,6 +121,20 @@ function add_review(callback){
 
 }
 
+
+$(function(){
+  $('#addvolunteer , #addshaeed , #sendreviewmsg').submit(function(){
+        var that = $(this);
+        $.post($(this).attr('action'), $(this).serialize(), function(json) {
+          if(json["status"] == "success"){
+             $(that)[0].reset();
+          }
+          alert(JSON.stringify(json["text"]));
+        }, 'json');
+        return false;
+  });
+});
+
 function add_volunteer(callback){
 
 	
